@@ -56,10 +56,9 @@ function showDialog(doc) {
     // 1. フォルダ選択
     var folderRow = column.dialogRows.add();
     folderRow.staticTexts.add({staticLabel: "📁 フォルダ選択:"});
-    var folderSelectButton = folderRow.dialogColumns.add().dialogButtons.add({
-        staticLabel: "選択", 
-        minWidth: 80
-    });
+    var buttonGroup = folderRow.dialogColumns.add();
+    var folderSelectButton = buttonGroup.add("button", undefined, "選択");
+    folderSelectButton.minWidth = 80;
     var folderPathText = folderRow.dialogColumns.add().staticTexts.add({
         staticLabel: "フォルダが選択されていません",
         minWidth: 200
@@ -178,44 +177,42 @@ function showDialog(doc) {
     
     // 8. ボタン（プレビュー、キャンセル、OK）
     var buttonRow = column.dialogRows.add();
-    var previewButton = buttonRow.dialogButtons.add({
-        staticLabel: "プレビュー 👁️", 
-        minWidth: 100
-    });
+    var previewButton = buttonRow.add("button", undefined, "プレビュー 👁️");
+    previewButton.minWidth = 100;
     
     // イベントリスナー
     var selectedFolder = null;
     
     // フォルダ選択ボタンのイベント
-    folderSelectButton.addEventListener("onClick", function() {
+    folderSelectButton.onClick = function() {
         selectedFolder = Folder.selectDialog("オブジェクトフォルダを選択");
         if (selectedFolder) {
             folderPathText.staticLabel = decodeURI(selectedFolder.fsName);
         }
-    });
+    };
     
     // ファイルタイプラジオボタンのイベント
-    allFilesRadio.addEventListener("onClick", function() {
+    allFilesRadio.onClick = function() {
         fileTypeDropdown.enabled = false;
-    });
+    };
     
-    specificTypeRadio.addEventListener("onClick", function() {
+    specificTypeRadio.onClick = function() {
         fileTypeDropdown.enabled = true;
-    });
+    };
     
     // 配置スタイルラジオボタンのイベント
-    gridRadio.addEventListener("onClick", function() {
+    gridRadio.onClick = function() {
         gridSettingsRow.enabled = true;
         randomSettingsRow.enabled = false;
-    });
+    };
     
-    randomRadio.addEventListener("onClick", function() {
+    randomRadio.onClick = function() {
         gridSettingsRow.enabled = false;
         randomSettingsRow.enabled = true;
-    });
+    };
     
     // プレビューボタンのイベント
-    previewButton.addEventListener("onClick", function() {
+    previewButton.onClick = function() {
         if (!selectedFolder) {
             alert("フォルダを選択してください。");
             return;
@@ -227,7 +224,7 @@ function showDialog(doc) {
         } catch (e) {
             alert("プレビューを生成できませんでした: " + e.message);
         }
-    });
+    };
     
     // ダイアログを表示
     var result = dialog.show();
