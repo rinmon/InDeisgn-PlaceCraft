@@ -1,5 +1,5 @@
 /*
- * ObjectDroper.jsx
+ * PlaceCraft.jsx
  * InDesign オブジェクト自動配置スクリプト
  * 
  * このスクリプトは、Adobe InDesign上で指定フォルダ内のオブジェクト（画像、PDFなど）を
@@ -13,7 +13,7 @@
 $.level = 2;
 
 // 定数
-var SCRIPT_NAME = "ObjectDroper";
+var SCRIPT_NAME = "PlaceCraft";
 var SCRIPT_VERSION = "1.0.0";
 var DEFAULT_OBJECT_LIMIT = 100;
 var DEFAULT_GRID_COLUMNS = 3;
