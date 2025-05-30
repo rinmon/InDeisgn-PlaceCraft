@@ -56,8 +56,11 @@ function showDialog(doc) {
     // 1. フォルダ選択
     var folderRow = column.dialogRows.add();
     folderRow.staticTexts.add({staticLabel: "📁 フォルダ選択:"});
-    var buttonGroup = folderRow.dialogColumns.add();
-    var folderSelectButton = buttonGroup.add("button", undefined, "選択");
+    
+    // ボタン用の列を追加
+    var buttonColumn = folderRow.dialogColumns.add();
+    var selectGroup = buttonColumn.borderPanels.add();
+    var folderSelectButton = selectGroup.enablingGroups.add({staticLabel: "選択"});
     folderSelectButton.minWidth = 80;
     var folderPathText = folderRow.dialogColumns.add().staticTexts.add({
         staticLabel: "フォルダが選択されていません",
@@ -177,7 +180,8 @@ function showDialog(doc) {
     
     // 8. ボタン（プレビュー、キャンセル、OK）
     var buttonRow = column.dialogRows.add();
-    var previewButton = buttonRow.add("button", undefined, "プレビュー 👁️");
+    var previewGroup = buttonRow.borderPanels.add();
+    var previewButton = previewGroup.enablingGroups.add({staticLabel: "プレビュー 👁️"});
     previewButton.minWidth = 100;
     
     // イベントリスナー
